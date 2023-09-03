@@ -18,13 +18,11 @@ export default () => {
     result = isEven(num) ? 'yes' : 'no';
     console.log(`Question: ${num}`);
     answer = readlineSync.question('Your answer: ');
+    const wrongMessage = `'${answer}' is wrong answer ;(. Correct answer was '${result}'. Let's try again, ${name}!`;
     if (answer === result) {
       console.log(correctMessage);
     } else {
-      console.log(
-        // eslint-disable-next-line comma-dangle
-        `'${answer}' is wrong answer ;(. Correct answer was '${result}'. Let's try again, ${name}!`
-      );
+      console.log(wrongMessage);
       break;
     }
     i += 1;
