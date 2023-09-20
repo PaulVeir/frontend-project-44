@@ -3,6 +3,7 @@ import {
   isAllCorrect,
   getQuestions,
   getRandomize,
+  getInstructions,
 } from '../index.js';
 
 const getRandom = (n) => Math.floor(Math.random() * n);
@@ -19,11 +20,10 @@ const getArithmetic = () => {
   return arithmetic;
 };
 
-const getInstructions = () => console.log('What number is missing in the progression?');
-
 export default () => {
   const name = getGreeting();
-  getInstructions();
+  const [,,, progrInstructions] = getInstructions();
+  console.log(progrInstructions);
   for (let i = 0; i < 3; i += 1) {
     const arithmetic = getArithmetic();
     const skipIndex = getRandom(arithmetic.length);
