@@ -3,6 +3,7 @@ import {
   isAllCorrect,
   getQuestions,
   getRandomize,
+  getInstructions,
 } from '../index.js';
 
 const getOperator = () => {
@@ -24,11 +25,10 @@ const getResult = (num1, num2, operator) => {
   }
 };
 
-const getInstructions = () => console.log('What is the result of the expression?');
-
 export default () => {
   const name = getGreeting();
-  getInstructions();
+  const [, calcInstructions] = getInstructions();
+  console.log(calcInstructions);
   for (let i = 0; i < 3; i += 1) {
     const num1 = getRandomize();
     const num2 = getRandomize();
