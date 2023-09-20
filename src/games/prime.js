@@ -1,8 +1,7 @@
 import {
   getGreeting,
-  isAllCorrect,
-  getQuestions,
-  getRandomize,
+  runGame,
+  getInstructions,
 } from '../index.js';
 
 const isPrime = (num) => {
@@ -18,19 +17,9 @@ const isPrime = (num) => {
   return result;
 };
 
-const getInstructions = () => console.log('Answer "yes" if given number is prime. Otherwise answer "no".');
-
 export default () => {
   const name = getGreeting();
-  getInstructions();
-  for (let i = 0; i < 3; i += 1) {
-    const num = getRandomize();
-    const result = isPrime(num) ? 'yes' : 'no';
-    const message = getQuestions(num, result, name);
-    if (!message) {
-      break;
-    } else {
-      isAllCorrect(i, message, name);
-    }
-  }
+  const [,,,, evenInstructions] = getInstructions();
+  console.log(evenInstructions);
+  runGame(isPrime, name);
 };
