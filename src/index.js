@@ -7,6 +7,17 @@ const getGreeting = () => {
   return name;
 };
 
+const getInstructions = () => {
+  const instructions = [
+    'Answer "yes" if the number is even, otherwise answer "no".',
+    'What is the result of the expression?',
+    'Find the greatest common divisor of given numbers.',
+    'What number is missing in the progression?',
+    'Answer "yes" if given number is prime. Otherwise answer "no".',
+  ];
+  return instructions;
+};
+
 const getQuestions = (num, result, name) => {
   const correct = 'Correct!';
   console.log(`Question: ${num}`);
@@ -32,6 +43,24 @@ const isAllCorrect = (count, message, name) => {
 
 const getRandomize = () => Math.floor(Math.random() * 100) + 1;
 
+const runGame = (checkFunc, name) => {
+  for (let i = 0; i < 3; i += 1) {
+    const num = getRandomize();
+    const result = checkFunc(num) ? 'yes' : 'no';
+    const message = getQuestions(num, result, name);
+    if (!message) {
+      break;
+    } else {
+      isAllCorrect(i, message, name);
+    }
+  }
+};
+
 export {
-  getQuestions, getGreeting, isAllCorrect, getRandomize,
+  getQuestions,
+  getGreeting,
+  isAllCorrect,
+  getRandomize,
+  runGame,
+  getInstructions,
 };
