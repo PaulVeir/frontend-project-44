@@ -7,6 +7,8 @@ const getGreeting = () => {
   return name;
 };
 
+const getRandomize = () => Math.floor(Math.random() * 100) + 1;
+
 const getInstructions = () => {
   const instructions = [
     'Answer "yes" if the number is even, otherwise answer "no".',
@@ -18,49 +20,32 @@ const getInstructions = () => {
   return instructions;
 };
 
-const getQuestions = (num, result, name) => {
+const runGames = (func) => {
+  const name = getGreeting();
+  const [,, instructions] = func();
+  console.log(instructions);
   const correct = 'Correct!';
-  console.log(`Question: ${num}`);
-  const answer = readlineSync.question('Your answer: ');
-  const wrong = `'${answer}' is wrong answer ;(. Correct answer was '${result}'. Let's try again, ${name}!`;
-  let message = true;
-  if (answer === result) {
-    console.log(correct);
-  } else {
-    console.log(wrong);
-    message = false;
-  }
-  return message;
-};
-
-const isAllCorrect = (count, message, name) => {
-  const congratulations = `Congratulations, ${name}!`;
-  if (message && count === 2) {
-    return console.log(congratulations);
-  }
-  return 1;
-};
-
-const getRandomize = () => Math.floor(Math.random() * 100) + 1;
-
-const runGame = (checkFunc, name) => {
   for (let i = 0; i < 3; i += 1) {
-    const num = getRandomize();
-    const result = checkFunc(num) ? 'yes' : 'no';
-    const message = getQuestions(num, result, name);
-    if (!message) {
-      break;
+    const [num, result] = func();
+    console.log(`Question: ${num}`);
+    const answer = readlineSync.question('Your answer: ');
+    const wrong = `'${answer}' is wrong answer ;(. Correct answer was '${result}'. Let's try again, ${name}!`;
+    let message = true;
+    if (answer === result) {
+      console.log(correct);
     } else {
-      isAllCorrect(i, message, name);
+      console.log(wrong);
+      message = false;
+      break;
+    }
+    if (message && i === 2) {
+      console.log(`Congratulations, ${name}!`);
     }
   }
 };
 
 export {
-  getQuestions,
-  getGreeting,
-  isAllCorrect,
-  getRandomize,
-  runGame,
+  runGames,
   getInstructions,
+  getRandomize,
 };
