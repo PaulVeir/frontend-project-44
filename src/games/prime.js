@@ -1,7 +1,7 @@
 import {
-  getGreeting,
-  runGame,
+  runGames,
   getInstructions,
+  getRandomize,
 } from '../index.js';
 
 const isPrime = (num) => {
@@ -17,9 +17,13 @@ const isPrime = (num) => {
   return result;
 };
 
+const runPrimeGame = () => {
+  const [,,,, primeInstructions] = getInstructions();
+  const num = getRandomize();
+  const result = isPrime(num) ? 'yes' : 'no';
+  return [num, result, primeInstructions];
+};
+
 export default () => {
-  const name = getGreeting();
-  const [,,,, evenInstructions] = getInstructions();
-  console.log(evenInstructions);
-  runGame(isPrime, name);
+  runGames(runPrimeGame);
 };
