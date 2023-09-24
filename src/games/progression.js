@@ -1,7 +1,5 @@
 import {
-  getGreeting,
-  isAllCorrect,
-  getQuestions,
+  runGames,
   getRandomize,
   getInstructions,
 } from '../index.js';
@@ -20,21 +18,16 @@ const getArithmetic = () => {
   return arithmetic;
 };
 
-export default () => {
-  const name = getGreeting();
+const runProgressionGame = () => {
   const [,,, progrInstructions] = getInstructions();
-  console.log(progrInstructions);
-  for (let i = 0; i < 3; i += 1) {
-    const arithmetic = getArithmetic();
-    const skipIndex = getRandom(arithmetic.length);
-    const result = arithmetic[skipIndex].toString();
-    arithmetic[skipIndex] = '..';
-    const expression = arithmetic.join(' ');
-    const message = getQuestions(expression, result, name);
-    if (!message) {
-      break;
-    } else {
-      isAllCorrect(i, message, name);
-    }
-  }
+  const arithmetic = getArithmetic();
+  const skipIndex = getRandom(arithmetic.length);
+  const result = arithmetic[skipIndex].toString();
+  arithmetic[skipIndex] = '..';
+  const expression = arithmetic.join(' ');
+  return [expression, result, progrInstructions];
+};
+
+export default () => {
+  runGames(runProgressionGame);
 };
