@@ -1,10 +1,18 @@
-import { runGame, getGreeting, getInstructions } from '../index.js';
+import {
+  runGames,
+  getInstructions,
+  getRandomize,
+} from '../index.js';
 
 const isEven = (num) => num % 2 === 0;
 
-export default () => {
-  const name = getGreeting();
+const runEvenGame = () => {
   const [evenInstructions] = getInstructions();
-  console.log(evenInstructions);
-  runGame(isEven, name);
+  const num = getRandomize();
+  const result = isEven(num) ? 'yes' : 'no';
+  return [num, result, evenInstructions];
+};
+
+export default () => {
+  runGames(runEvenGame);
 };
