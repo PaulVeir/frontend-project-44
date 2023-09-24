@@ -1,9 +1,7 @@
 import {
-  getGreeting,
-  isAllCorrect,
-  getQuestions,
-  getRandomize,
+  runGames,
   getInstructions,
+  getRandomize,
 } from '../index.js';
 
 const getOperator = () => {
@@ -25,21 +23,16 @@ const getResult = (num1, num2, operator) => {
   }
 };
 
-export default () => {
-  const name = getGreeting();
+const runCalcGame = () => {
   const [, calcInstructions] = getInstructions();
-  console.log(calcInstructions);
-  for (let i = 0; i < 3; i += 1) {
-    const num1 = getRandomize();
-    const num2 = getRandomize();
-    const operator = getOperator();
-    const expression = `${num1} ${operator} ${num2}`;
-    const result = getResult(num1, num2, operator).toString();
-    const message = getQuestions(expression, result, name);
-    if (!message) {
-      break;
-    } else {
-      isAllCorrect(i, message, name);
-    }
-  }
+  const num1 = getRandomize();
+  const num2 = getRandomize();
+  const operator = getOperator();
+  const expression = `${num1} ${operator} ${num2}`;
+  const result = getResult(num1, num2, operator).toString();
+  return [expression, result, calcInstructions];
+};
+
+export default () => {
+  runGames(runCalcGame);
 };
