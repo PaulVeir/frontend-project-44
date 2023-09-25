@@ -20,28 +20,32 @@ const getInstructions = () => {
   return instructions;
 };
 
+const getCongratulations = (count, name) => {
+  if (count === 3) {
+    console.log(`Congratulations, ${name}!`);
+  }
+};
+
 const runGames = (func) => {
   const name = getGreeting();
   const [,, instructions] = func();
   console.log(instructions);
   const correct = 'Correct!';
+  let correctCount = 0;
   for (let i = 0; i < 3; i += 1) {
     const [num, result] = func();
     console.log(`Question: ${num}`);
     const answer = readlineSync.question('Your answer: ');
     const wrong = `'${answer}' is wrong answer ;(. Correct answer was '${result}'. Let's try again, ${name}!`;
-    let message = true;
     if (answer === result) {
       console.log(correct);
+      correctCount += 1;
     } else {
       console.log(wrong);
-      message = false;
       break;
     }
-    if (message && i === 2) {
-      console.log(`Congratulations, ${name}!`);
-    }
   }
+  getCongratulations(correctCount, name);
 };
 
 export {
