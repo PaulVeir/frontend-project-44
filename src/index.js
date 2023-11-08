@@ -7,7 +7,7 @@ const getGreeting = () => {
   return name;
 };
 
-const getRandomize = () => Math.floor(Math.random() * 100) + 1;
+const getRandomize = (min = 1, max = 100) => Math.floor(Math.random() * max) + min;
 
 const runGames = (gameFunction) => {
   const name = getGreeting();
