@@ -1,13 +1,12 @@
 import {
   runGames,
   getRandomize,
-  getInstructions,
 } from '../index.js';
 
 const getGcd = (a, b) => ((a % b) ? getGcd(b, a % b) : Math.abs(b));
 
 const runGcdGame = () => {
-  const [,, gcdInstructions] = getInstructions();
+  const gcdInstructions = 'Find the greatest common divisor of given numbers.';
   const num1 = getRandomize();
   const num2 = getRandomize();
   const expression = `${num1} ${num2}`;
