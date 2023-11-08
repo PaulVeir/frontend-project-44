@@ -3,8 +3,6 @@ import {
   getRandomize,
 } from '../index.js';
 
-const getRandom = (n) => Math.floor(Math.random() * n);
-
 const getArithmetic = (difference, len) => {
   const arithmetic = [];
   arithmetic[0] = getRandomize();
@@ -16,11 +14,11 @@ const getArithmetic = (difference, len) => {
 
 const runProgressionGame = () => {
   const progrInstructions = 'What number is missing in the progression?';
-  const difference = getRandom(5) + 1;
+  const difference = getRandomize(1, 5);
   const minLength = 5;
-  const len = minLength + difference;
+  const len = minLength + getRandomize(0, 6);
   const arithmetic = getArithmetic(difference, len);
-  const skipIndex = getRandom(arithmetic.length);
+  const skipIndex = getRandomize(0, arithmetic.length);
   const result = arithmetic[skipIndex].toString();
   arithmetic[skipIndex] = '..';
   const expression = arithmetic.join(' ');
