@@ -1,15 +1,11 @@
 import {
   runGames,
   getRandomize,
-  getInstructions,
 } from '../index.js';
 
 const getRandom = (n) => Math.floor(Math.random() * n);
 
-const getArithmetic = () => {
-  const difference = getRandom(5) + 1;
-  const minLength = 5;
-  const len = minLength + difference;
+const getArithmetic = (difference, len) => {
   const arithmetic = [];
   arithmetic[0] = getRandomize();
   for (let i = 1; i < len; i += 1) {
@@ -19,8 +15,11 @@ const getArithmetic = () => {
 };
 
 const runProgressionGame = () => {
-  const [,,, progrInstructions] = getInstructions();
-  const arithmetic = getArithmetic();
+  const progrInstructions = 'What number is missing in the progression?';
+  const difference = getRandom(5) + 1;
+  const minLength = 5;
+  const len = minLength + difference;
+  const arithmetic = getArithmetic(difference, len);
   const skipIndex = getRandom(arithmetic.length);
   const result = arithmetic[skipIndex].toString();
   arithmetic[skipIndex] = '..';
