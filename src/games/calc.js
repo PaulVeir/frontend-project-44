@@ -1,12 +1,11 @@
 import {
   runGames,
-  getInstructions,
   getRandomize,
 } from '../index.js';
 
 const getOperator = () => {
   const operatorList = ['+', '-', '*'];
-  const index = Math.floor(Math.random() * operatorList.length);
+  const index = getRandomize(0, operatorList.length);
   return operatorList[index];
 };
 
@@ -19,12 +18,12 @@ const getResult = (num1, num2, operator) => {
     case '*':
       return num1 * num2;
     default:
-      return 1;
+      throw new Error(`Unknown operator: '${operator}'!`);
   }
 };
 
 const runCalcGame = () => {
-  const [, calcInstructions] = getInstructions();
+  const calcInstructions = 'What is the result of the expression?';
   const num1 = getRandomize();
   const num2 = getRandomize();
   const operator = getOperator();
